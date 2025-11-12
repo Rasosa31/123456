@@ -1,6 +1,9 @@
 # Stock Price Movement Prediction with Machine Learning
 
 [![CI](https://github.com/Rasosa31/123456/actions/workflows/ci.yml/badge.svg)](https://github.com/Rasosa31/123456/actions)
+ 
+CI: tests automáticos (pytest) — se ejecuta en cada push y pull request a `main`.
+Ver el historial y el estado de las ejecuciones en: https://github.com/Rasosa31/123456/actions
 
 This academic project applies Machine Learning techniques to predict whether a stock's price will go up or down the next day, using historical data and supervised models. The approach is practical, featuring a functional API, Dockerized environment, and a trained model ready to make predictions based on user-provided inputs.
 
