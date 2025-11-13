@@ -38,6 +38,12 @@ jobs:
             )
           done
 
-      - name: Run tests
+      - name: Run tests (verbose + env info)
         run: |
-          pytest -q
+          echo "--- Environment ---"
+          python --version
+          pip --version
+          echo "--- pip freeze ---"
+          pip freeze
+          echo "--- Running pytest (verbose) ---"
+          pytest -vv -r a
