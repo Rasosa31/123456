@@ -1,4 +1,5 @@
 📈 Stock Price Movement Prediction: Ecopetrol (EC) vs. WTI Oil
+
 This academic project applies Machine Learning techniques to predict whether Ecopetrol S.A. (EC) stock price will go up or down the next day, correlating historical data with the WTI Crude Oil (CL=F) price. The system provides a trained model, a functional REST API, and a Dockerized environment.
 
 🎯 Core Objective
