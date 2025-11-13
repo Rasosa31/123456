@@ -11,35 +11,35 @@ Follow these steps to set up the system, train the model, and generate predictio
 
 1. Prerequisites and Installation
 
-Clone the repository:
-```bash
-git clone https://github.com/Rasosa31/123456.git
-cd 123456
-```
+   1. Clone the repository:
+   ```bash
+   git clone https://github.com/Rasosa31/123456.git
+   cd 123456
+   ```
 
-Create and activate a virtual environment:
+   2. Create and activate a virtual environment:
 
-```Bash
-python -m venv .venv
-source .venv/bin/activate # For Windows: .venv\Scripts\activate
-```
+   ```Bash
+   python -m venv .venv
+   source .venv/bin/activate # For Windows: .venv\Scripts\activate
+   ```
 
-Install dependencies (includes scikit-learn, Flask, Pytest):
+   3. Install dependencies (includes scikit-learn, Flask, Pytest):
 
+   ```Bash
+   pip install -r requirements.txt
 
-```Bash
-pip install -r requirements.txt
 2. Quick Script Execution
-```
+   ```
 
-Script	Description	Command
+
+
 ```Bash
-Train Model	Trains 4 models and saves the best one (Logistic Regression) in data/best_model.pkl.	python run_pipeline_from_df_ml.py
-Predict	Generates predictions on the test dataset.	python predict_stock.py --use-df-ml
-Visualize	Generates 6 PNG charts (Confusion Matrix, ROC, etc.) in the outputs/ folder.	python generate_visualizations.py
+
 ```
 
 💻 REST API Integration (Flask)
+
 The model is exposed via a web API to perform real-time predictions.
 
 Start the Server
