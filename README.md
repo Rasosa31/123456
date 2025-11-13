@@ -22,8 +22,10 @@ Create and activate a virtual environment:
 ```Bash
 python -m venv .venv
 source .venv/bin/activate # For Windows: .venv\Scripts\activate
-Install dependencies (includes scikit-learn, Flask, Pytest):
 ```
+
+Install dependencies (includes scikit-learn, Flask, Pytest):
+
 
 ```Bash
 pip install -r requirements.txt
