@@ -41,12 +41,21 @@ jobs:
             )
           done
 
-      - name: Run tests (verbose + env info)
+      - name: Run tests (verbose + capture logs)
         run: |
-          echo "--- Environment ---"
-          python --version
-          pip --version
-          echo "--- pip freeze ---"
-          pip freeze
-          echo "--- Running pytest (verbose) ---"
-          pytest -vv -r a
+          echo "--- Environment ---" > ci_env.txt
+          python --version >> ci_env.txt
+          pip --version >> ci_env.txt
+          echo "--- pip freeze ---" >> ci_env.txt
+          pip freeze >> ci_env.txt
+          echo "--- Running pytest (verbose) ---" | tee pytest_output.txt
+          # Ejecutar pytest y capturar salida completa en archivo
+          pytest -vv -r a 2>&1 | tee -a pytest_output.txt
+
+      - name: Upload CI logs artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-logs
+          path: |
+            ci_env.txt
+            pytest_output.txt
