@@ -77,119 +77,118 @@ Follow this steps to clone the repository, built the Docker and get a prediction
 
 ### To clone the repository
 ```bash
-# Sistema de Predicción: EC vs CL (Dólar Ecuatoriano vs Petróleo WTI)
+# Prediction System: EC vs CL (Ecopetrol S.A vs Oil WTI)
 
-## 📋 Descripción General
+## 📋 General Description
 
-Este proyecto implementa un **sistema de predicción de precios** usando aprendizaje automático (Machine Learning) para predecir movimientos del **Dólar Ecuatoriano (EC)** correlacionando con el **Precio del Petróleo Crudo (CL=F/WTI)**.
+This project implements a **price prediction system** using machine learning (Machine Learning) to predict movements of **Ecopetrol S.A (EC)** correlating with the **Price of Crude Oil (CL=F/WTI)**.
 
-### 🎯 Objetivo
+### 🎯 Objetive
 
-Clasificar si el precio del EC subirá (Sube) o bajará (Baja) utilizando características técnicas y correlación con el precio del petróleo.
-
+Classify if the price of the EC will go up (up) or down (down) using technical characteristics and correlation with the price of oil.
 **Clase Binaria:**
-- **Sube (0)**: El precio del EC aumenta en el siguiente período
-- **Baja (1)**: El precio del EC disminuye en el siguiente período
+- **Goes up (0)**: The price of the EC increases in the following period
+- **Goes down (1)**: The price of the EC decreases in the following period
 
 ---
 
 ## 🚀 Quick Start
 
-### Requisitos Previos
+### Prerequisites
 
 - Python 3.8+
-- `pip` (gestor de paquetes)
-- Entorno virtual (recomendado)
+- `pip` (Package manager)
+-Virtual environment (recommended)
 
 ### Instalación
 
-1. **Clonar o descargar el proyecto**
+1. **Clone or download the project**
 ```bash
 cd /ruta/al/proyecto
 ```
 
-2. **Crear entorno virtual**
+2. **Create virtual environment**
 ```bash
 python -m venv .venv
 source .venv/bin/activate  # En Windows: .venv\Scripts\activate
 ```
 
-3. **Instalar dependencias**
+3. **Install dependencies**
 ```bash
 pip install -r requirements.txt
 ```
 
-### Ejecución Rápida
+### Fast Execution
 
 #### 1. Entrenar el Modelo
 ```bash
 python run_pipeline_from_df_ml.py
 ```
-**Output:** Entrena 4 modelos, selecciona el mejor, guarda artifacts en `data/`
+**Output:** Train 4 models, select the best, save artifacts in `data/`
 
-#### 2. Realizar Predicciones
+#### 2. Make Predictions
 ```bash
 python predict_stock.py --use-df-ml --output data/predictions.csv
 ```
-**Output:** Genera predicciones con probabilidades en `data/predictions.csv`
+**Output:** Generate predictions with probabilities in `data/predictions.csv`
 
-#### 3. Generar Visualizaciones
+#### 3. Generate Visualizations
 ```bash
 python generate_visualizations.py
 ```
-**Output:** Genera 6 gráficos en `outputs/` (PNG)
+**Output:** Generates 6 charts in `outputs/` (PNG)
 
-#### 4. Entrenar Modelo Mejorado (Opcional)
+#### 4. Train Improved Model (Optional)
 ```bash
 python train_improved_model.py
 ```
-**Output:** Compara modelo original con versiones balanceadas
+**Output:** Compare original model with balanced versions
 
 ---
 
-## 📊 Conjunto de Datos
+## 📊 Data Set
 
-### Ubicación
+### Location
 - **Principal:** `data/df_ml.csv`
-- **Alternativas:** `data/EC_processed.csv`, `data/PA_processed.csv`
+- **Alternatives:** `data/EC_processed.csv`, `data/PA_processed.csv`
 
-### Estructura del Conjunto de Datos
+### Data Set Structure
 
 ```
-Dimensión: 1157 filas × 13 columnas
 
-Columnas Disponibles:
-├── PRECIOS (Activo Principal - EC)
-│   ├── Close: Precio de cierre diario
-│   ├── Volume: Volumen de negociación
-│   └── Target: Clasificación (0=Sube, 1=Baja) [ETIQUETA]
-├── INDICADORES TÉCNICOS
-│   ├── SMA_100: Media móvil simple 100 períodos
-│   ├── RSI_14: Índice de Fuerza Relativa (14 períodos)
-│   ├── Overbought: Indicador sobrecomprado (RSI > 70)
-│   └── Oversold: Indicador sobrevendido (RSI < 30)
-├── BANDERAS DE PREDICCIÓN
-│   ├── Below_SMA: Precio < SMA (1=sí, 0=no)
-│   └── High_Volume: Volumen elevado (1=sí, 0=no)
-└── CORRELACIÓN CON ACTIVO CORRELACIONADO (CL=F/Petróleo)
-     ├── CA_Close: Precio cierre del petróleo
-     ├── CA_Change: Cambio porcentual del petróleo
-     ├── CA_Volatility: Volatilidad del petróleo
-     └── PA_CA_Ratio: Ratio EC/Petróleo
+Available Columns:
+├── PRICES (Main Asset - EC)
+│   ├── Close: Daily closing price
+│   ├── Volume: Volume of negotiation
+│   └── Target: Classification (0=Up, 1=down) [TAG]
+├── TECHNICAL INDICATORS
+│   ├── SMA_100: Simple moving average 100 periods
+│   ├── RSI_14: Relative Strength Index (14 periods)
+│   ├── Overbought: Indicator overbought (RSI > 70)
+│   └── Oversold: Indicator oversell (RSI < 30)
+├── PREDICTION FLAGS
+│   ├── Below_SMA: Price < SMA (1=yes, 0=no)
+│   └── High_Volume: High volume(1=yes, 0=no)
+└── CORRELACIÓN CON ACTIVO CORRELACIONADO (CL=F/oil)
+     ├── CA_Close: Oil closing price
+     ├── CA_Change: Percentage change in oil
+     ├── CA_Volatility: Oil volatility
+     └── PA_CA_Ratio: Ratio EC/oil
 ```
 
-### Distribución de Clases
+### Distribution of Classes
 ```
-Sube (0):  607 muestras (52.5%)
-Baja (1):  550 muestras (47.5%)
-Desbalance: ~5% (relativamente balanceado)
+Rise (0): 607 samples (52.5%)
+Low (1): 550 samples (47.5%)
+Imbalance: ~5% (relatively balanced)
+
 ```
 
 ---
 
-## 🤖 Modelos Entrenados
+## 🤖 Trained Models
 
-### Comparativa de Desempeño
+### Performance Comparison
 
 | Modelo | Accuracy | Precision | Recall | F1-Score |
 |--------|----------|-----------|--------|----------|
@@ -198,10 +197,10 @@ Desbalance: ~5% (relativamente balanceado)
 | K-Nearest Neighbors | 0.5300 | 0.54 | 1.00 | 0.70 |
 | XGBoost | 0.5086 | 0.52 | 1.00 | 0.69 |
 
-**Modelo Seleccionado:** `Logistic Regression` (mejor accuracy)
-**Archivo:** `data/best_model.pkl`
+**Selected Model:** `Logistic Regression` (mejor accuracy)
+**File:** `data/best_model.pkl`
 
-### Arquitectura de los Modelos
+### Architecture of the Models
 
 #### Logistic Regression
 - **Algoritmo:** Regresión Logística
@@ -211,7 +210,7 @@ Desbalance: ~5% (relativamente balanceado)
 
 #### Random Forest (Balanceado)
 - **Algoritmo:** Random Forest + Class Weights
-- **Parámetros:** `n_estimators=100, class_weight='balanced'`
+- **Parameters:** `n_estimators=100, class_weight='balanced'`
 - **Top 3 Features:**
   1. CA_Change: 0.1317
   2. Volume: 0.1244
@@ -219,20 +218,20 @@ Desbalance: ~5% (relativamente balanceado)
 
 ---
 
-## 📈 Resultados de Predicciones
+## 📈 Predictions Results
 
-### Estadísticas Resumidas
+### Summary Statistics
 
 ```
-Total Predicciones: 1157
-├── Predicciones "Sube":   1157 (100.0%)
-└── Predicciones "Baja":       0 (0.0%)
+Total Predictions: 1157
+├── Predictions "Goes up":   1157 (100.0%)
+└── Predictions "Goes down":       0 (0.0%)
 
-Confianza Promedio:
-├── P(Sube): 50.51% (±0.08%)
-└── P(Baja): 49.49% (±0.08%)
+Average Confidence:
+├── P(goes up): 50.51% (±0.08%)
+└── P(goes down): 49.49% (±0.08%)
 
-Matriz de Confusión:
+Confusion: Matriz  
               Predicho
 Real    | Sube | Baja |
       Sube |  607 |   0  |
@@ -246,18 +245,18 @@ Métricas:
 └── ROC-AUC:   54.51%
 ```
 
-### Archivos de Salida
+### Output Files
 
-| Archivo | Descripción |
+| File       | Description |
 |---------|-------------|
-| `data/best_model.pkl` | Modelo entrenado (Logistic Regression) |
-| `data/features.pkl` | Lista de 12 features utilizadas |
-| `data/predictions_df_ml.csv` | Predicciones con probabilidades |
-| `data/best_model_balanced.pkl` | Modelo mejorado con balanceo de clases |
+| `data/best_model.pkl` | Trained model (Logistic Regression) |
+| `data/features.pkl` | List of 12 features used|
+| `data/predictions_df_ml.csv` | Predictions with probabilities |
+| `data/best_model_balanced.pkl` | Improved model with class balance|
 
 ---
 
-## 📁 Estructura del Proyecto
+## 📁 Project Structure
 
 ```
 .
@@ -299,60 +298,62 @@ Métricas:
 
 ---
 
-## 🔧 Uso Detallado
+## 🔧 Detailed Use
 
-### 1. Entrenar Modelos
+### 1. Train Models
 
 ```bash
 python run_pipeline_from_df_ml.py
 ```
 
-**¿Qué hace?**
-- Carga datos de `data/df_ml.csv`
-- Prepara features (12 seleccionadas)
-- Split train/test 80/20 (sin shuffle, respeta series temporal)
-- Entrena 4 modelos:
-  - Logistic Regression
-  - Random Forest (100 árboles)
-  - KNN (k=5)
-  - XGBoost
-- Evalúa cada modelo
-- Guarda el mejor en `data/best_model.pkl`
-- Guarda features en `data/features.pkl`
+**What does it do? **
 
-**Output esperado:**
+- Load data from `data/df_ml.csv`
+- Prepare features (12 selected)
+- Split train/test 80/20 (without shuffle, respects temporary series)
+- Train 4 models:
+- Logistic Regression
+- Random Forest (100 trees)
+- KNN (k=5)
+- XGBoost
+- Evaluate each model
+- Save the best in `data/best_model.pkl`
+- Save features in `data/features.pkl`
+
+**Output awaited:**
 ```
 Logistic Regression - Accuracy: 0.5647 ✓ MEJOR
 Random Forest - Accuracy: 0.5345
 KNN - Accuracy: 0.5300
 XGBoost - Accuracy: 0.5086
 
-✓ Modelo guardado: data/best_model.pkl
+✓ Model saved: data/best_model.pkl
 ```
 
 ---
 
-### 2. Realizar Predicciones
+### 2. Make Predictions
 
 ```bash
-# Opción A: Usar datos de training
-python predict_stock.py --use-df-ml --output predictions.csv
+# Option A: Use training data
+Python predict_stock.py --use-df-ml --output predictions.csv
 
-# Opción B: Usar archivo CSV personalizado
-python predict_stock.py --input custom_data.csv --output predictions.csv
+# Option B: Use custom CSV file
+Python predict_stock.py --input custom_data.csv --output predictions.csv
 
-# Opción C: Usar datos de entrenamiento (default)
-python predict_stock.py
+# Option C: Use training data (default)
+Python predict_stock.py
+
 ```
 
 **Parámetros:**
-- `--use-df-ml`: Usar `data/df_ml.csv` como entrada
-- `--input FILE`: Usar archivo CSV personalizado
-- `--output FILE`: Guardar predicciones en archivo (default: `data/predictions_df_ml.csv`)
+- `--use-df-ml`: Use `data/df_ml.csv` As an entrance
+- `--input FILE`: Use custom CSV file
+- `--output FILE`: Save predictions in file (default: `data/predictions_df_ml.csv`)
 
 **Output CSV:**
 ```
-Close,Volume,SMA_100,...,Target,prediction,prediction_label,prob_Sube,prob_Baja
+Close,Volume,SMA_100,...,Target,prediction,prediction_label,prob_goes up,prob_goes down
 12.59,1418100,12.798,...,1,0,Sube,0.507,0.493
 12.40,758200,12.814,...,0,0,Sube,0.504,0.496
 ...
@@ -360,63 +361,64 @@ Close,Volume,SMA_100,...,Target,prediction,prediction_label,prob_Sube,prob_Baja
 
 ---
 
-### 3. Generar Visualizaciones
+### 3. Generate Visualizations
 
 ```bash
 python generate_visualizations.py
 ```
 
-**Genera 6 gráficos:**
+**Output 6 graphs:**
 
 1. **01_prediction_distribution.png**
-    - Histograma de clases predichas
-    - Muestra desbalance de predicciones
+- Histogram of predicted classes
+- Sample imbalance of predictions
 
 2. **02_probability_distributions.png**
-    - Distribución de P(Sube)
-    - Distribución de P(Baja)
+    - Distribution de P(Sube)
+    - Distribution de P(Baja)
 
 3. **03_confusion_matrix.png**
-    - Matriz de confusión con heatmap
+    - Matrix of confusion withheatmap
     - Métricas: Sensitivity, Specificity, Accuracy
 
 4. **04_roc_curve.png**
     - Curva ROC con AUC
-    - Compara con clasificador aleatorio
+    -Compare with random classifier
 
 5. **05_feature_importance.png**
-    - Top 10 features más importantes
-    - Ordenadas por importancia descendente
+6. 
+- Top 10 most important features
+- Ordered by descending importance
 
 6. **06_summary_statistics.png**
-    - Resumen de todas las métricas
-    - Tabla de configuración
-
+- Summary of all metrics
+- Configuration table
 ---
 
-### 4. Entrenar Modelo Mejorado (Opcional)
+### 4. Train Improved Model (Optional)
 
 ```bash
 python train_improved_model.py
 ```
 
-**¿Qué hace?**
-- Carga modelo original
-- Entrena Logistic Regression + Class Weights
-- Entrena Random Forest + Class Weights
-- Compara accuracy y AUC
-- Guarda mejor modelo balanceado
+**¿What does it do??**
 
-**Cuando usar:**
-- Si hay desbalance de clases detectado
-- Para mejorar recall en clase minoritaria
-- Para ROC-AUC más equilibrado
+-Original model load
+- Train Logistic Regression + Class Weights
+- Train Random Forest + Class Weights
+- Compare accuracy and AUC
+- Save better balanced model
+- 
+**When to use:**
 
+- If there is a class imbalance detected
+- To improve recall in minority class
+- For more balanced ROC-AUC
 ---
 
-## 💻 Integración con Flask (API REST)
+## 💻 Integration with Flask (API REST)
 
-### Iniciar servidor
+### Start server
 
 ```bash
 python app.py
@@ -464,38 +466,39 @@ curl -X POST http://localhost:5000/predict \
 python test_api.py
 ```
 
-### Ejecutar la suite de tests (pytest)
+### Run the test suite (pytest)
 
-Recomendado para evaluar el proyecto completo (incluye tests de API y tests de alineación).
+Recommended to evaluate the entire project (includes API tests and alignment tests).
 
-1. Crear y activar entorno virtual (recomendado):
+1. Create and activate virtual environment (recommended):
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 ```
 
-2. Instalar dependencias (incluye `pytest`):
+2. Install dependencies (includes `pytest`):
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Ejecutar todos los tests con pytest:
+3. Run all tests with pytest:
 ```bash
 pytest -q
-# o para ver más detalle:
+
+# Or to see more details:
 pytest
 ```
 
-4. Ejecutar un test específico:
+4. Run a specific test:
 ```bash
 pytest tests/test_predictions_alignment.py -q
 ```
 
-Si estás en CI (GitHub Actions), usa `python -m pip install -r requirements.txt` y luego `pytest -q` en el job.
+If you are in CI (GitHub Actions), use `python -m pip install -r requirements.txt` y luego `pytest -q` in the  job.
 
 ---
 
-## ⚙️ Configuración de Dependencias
+## ⚙️ Dependencies Configuration
 
 ### requirements.txt
 
@@ -517,16 +520,16 @@ yfinance==0.2.38
 ### Instalación Personalizada
 
 ```bash
-# Solo ML
+# Only ML
 pip install pandas numpy scikit-learn xgboost joblib
 
-# Solo visualización
+# Visualization only
 pip install matplotlib seaborn
 
-# Solo API web
+# Only API web
 pip install flask
 
-# Todo
+# All
 pip install -r requirements.txt
 ```
 
@@ -541,32 +544,33 @@ pip install scikit-learn
 ```
 
 ### Error: "FileNotFoundError: data/df_ml.csv"
-**Solución:**
-- Asegúrate de estar en el directorio correcto
-- Verifica que `data/df_ml.csv` existe
+**Solution:**
+- Make sure you are in the correct directory
+- Verify that `data/df_ml.csv` exists
 ```bash
 ls -la data/df_ml.csv
 ```
 
 ### Error: "No model found in data/best_model.pkl"
 **Solución:**
-- Ejecuta primero `python run_pipeline_from_df_ml.py`
-- Esto entrena y guarda el modelo
-
+-Run `python run_pipeline_from_df_ml.py` first
+- This trains and saves the model
+- 
 ### Error: "yfinance HTTP 429 - Too Many Requests"
 **Solución:**
-- Usa la opción `--use-df-ml` en `predict_stock.py`
-- Usa datos locales en lugar de descargar de Yahoo Finance
+-Use the option `--use-df-ml` in `predict_stock.py`
+- Use local data instead of downloading from Yahoo Finance
 
-### Predicciones todas "Sube" (100%)
+### Predictions all "Goes up" (100%)
+
 **Información:**
-- Esto es normal con Logistic Regression en este dataset
-- El modelo está sobreajustado hacia la clase mayoritaria
-- Solución: Usar `train_improved_model.py` con balanceo
+- This is normal with Logistic Regression in this dataset
+- The model is overadjusted towards the majority class
+- Solution: Use `train_improved_model.py` with balancing
 
 ---
 
-## 📊 Métricas Clave Explicadas
+## 📊 Key Metrics Explained
 
 ### Accuracy (Precisión Global)
 ```
@@ -584,130 +588,107 @@ De las predicciones "Sube", ¿cuántas fueron correctas? **Actual: 100%**
 ```
 TP / (TP + FN)
 ```
-De los casos reales "Sube", ¿cuántos identificamos? **Actual: 100%**
+Of the real "Sube" cases, how many do we identify? **Current: 100%**
 
 ### F1-Score
 ```
 2 * (Precision * Recall) / (Precision + Recall)
 ```
-Promedio armónico de Precision y Recall. **Actual: 100%**
+Harmonic average of Precision and Recall. **Current: 100%**
 
 ### ROC-AUC
 ```
-Área bajo la curva ROC (0 a 1)
+Area under the curve ROC (0 a 1)
 ```
-Capacidad del modelo para discriminar clases. **Actual: 54.51%**
+Ability of the model to discriminate classes. **Actual: 54.51%**
 
 ---
 
 ## 🔬 Investigación Técnica
 
-### Features Utilizadas (12 Total)
+### Features Used (12 Total)
 
-| # | Feature | Descripción | Rango |
+| # | Feature | Description | Range |
 |----|---------|-------------|-------|
-| 1 | Close | Precio de cierre del EC | ~12.0-12.9 |
-| 2 | Volume | Volumen de negociación | ~300K-2.8M |
-| 3 | SMA_100 | Media móvil 100 períodos | ~12.6-12.9 |
-| 4 | RSI_14 | Índice fuerza relativa | 0-100 |
-| 5 | Overbought | Indicador RSI > 70 | 0-1 |
-| 6 | Oversold | Indicador RSI < 30 | 0-1 |
-| 7 | Below_SMA | Precio < SMA | 0-1 |
-| 8 | High_Volume | Volumen elevado | 0-1 |
-| 9 | CA_Close | Precio cierre petróleo | ~55-70 |
-| 10 | CA_Change | Cambio % petróleo | ~-3% a +3% |
-| 11 | PA_CA_Ratio | Ratio EC/Petróleo | ~0.18-0.22 |
-| 12 | CA_Volatility | Volatilidad petróleo | ~0.6-1.5 |
+| 1 | Close | EC closing price| ~12.0-12.9 |
+| 2 | Volume | Trading volume| ~300K-2.8M |
+| 3 | SMA_100 | Moving average 100 periods | ~12.6-12.9 |
+| 4 | RSI_14 | Relative force index | 0-100 |
+| 5 | Overbought | Indicator RSI > 70 | 0-1 |
+| 6 | Oversold | Indicator RSI < 30 | 0-1 |
+| 7 | Below_SMA | Price < SMA | 0-1 |
+| 8 | High_Volume | High volume | 0-1 |
+| 9 | CA_Close | Oil closing price | ~55-70 |
+| 10 | CA_Change | Change % oil | ~-3% a +3% |
+| 11 | PA_CA_Ratio | Ratio EC/Oil | ~0.18-0.22 |
+| 12 | CA_Volatility | Oil volatility| ~0.6-1.5 |
 
-### Importancia de Features (Top 5)
-
+### Importance of Features (Top 5)
 ```
-1. CA_Change       13.17%  ← El cambio diario del petróleo es muy importante
-2. Volume         12.44%   ← El volumen de negociación es clave
-3. CA_Volatility  12.37%   ← La volatilidad del petróleo importa
-4. CA_Close       12.05%   ← El precio del petróleo contribuye
-5. SMA_100        12.01%   ← La tendencia de mediano plazo ayuda
+1. CA_Change 13.17% ← The daily oil change is very important
+2. Volume 12.44% ← Trading volume is key
+3. CA_Volatility 12.37% ← Oil volatility matters
+4. CA_Close 12.05% ← The price of oil contributes
+5. SMA_100 12.01% ← Medium-term trend helps
 ```
 
 ---
 
-## 🎯 Limitaciones Conocidas
+## 🎯 Known Limitations
 
-1. **Predicciones sesgadas hacia "Sube"**
-    - El modelo tiende a predecir siempre la clase mayoritaria
-    - Impacto: Bajo recall en clase "Baja"
-    - Solución: Usar modelo mejorado con balanceo de clases
+1. **Predictions biased towards "Sube"**
 
+- The model tends to always predict the majority class
+- Impact: Low recall in "Low" class
+- Solution: Use improved model with class balancing
+- 
 2. **Accuracy limitado (56.47%)**
-    - Apenas mejor que adivinanza aleatoria (50%)
-    - Impacto: Uso en producción requiere validación adicional
-    - Causa probable: Datos no suficientemente predictivos o ruido en series temporales
+- Hardly better than random guessing (50%)
+- Impact: Use in production requires additional validation
+- Probable cause: Not sufficiently predictive data or noise in time series
+3. **EC-Oil correlation assumed**
 
-3. **Correlación EC-Petróleo asumida**
-    - No hay garantía de correlación consistente
-    - Impacto: El modelo puede no generalizarse a nuevos datos
-    - Recomendación: Reentrenar periódicamente
+- There is no guarantee of consistent correlation
+- Impact: The model may not be generalized to new data
+- Recommendation: Re-train periodically
 
-4. **Sin validación cruzada**
-    - Usa simple train/test split (80/20)
-    - Impacto: Posible overfitting
-    - Mejora: Usar cross-validation en futuras versiones
+4. **No cross-validation**
+- Use simple train/test split (80/20)
+- Impact: Possible overfitting
+- Improvement: Use cross-validation in future versions
 
-5. **Datos históricos limitados**
-    - Solo 1157 muestras (~4.6 años de datos diarios)
-    - Impacto: Posible insuficiencia para patrones a largo plazo
-    - Recomendación: Recolectar más datos
-
----
-
-## 🚀 Mejoras Futuras
-
-- [ ] Agregar más características (volatilidad histórica, ratios técnicos avanzados)
-- [ ] Implementar validación cruzada (5-fold CV)
-- [ ] Usar SMOTE para balanceo de clases
-- [ ] Explorar redes neuronales (LSTM para series temporales)
-- [ ] Optimización de hiperparámetros (GridSearchCV)
-- [ ] Integración con más fuentes de datos
-- [ ] Dashboard interactivo (Streamlit o Dash)
-- [ ] Alertas automáticas de predicciones
-- [ ] Backtesting de estrategias
-- [ ] Modelo ensemble (combinación de múltiples modelos)
+5. **Limited historical data**
+- Only 1157 samples (~4.6 years of daily data)
+- Impact: Possible insufficiency for long-term patterns
+- Recommendation: Collect more data
 
 ---
 
-## 📞 Soporte
+## 🚀 Future Improvements
 
-### Contacto
-- **Email:** [soporte@ejemplo.com]
-- **Issues:** Crear issue en repositorio GitHub
-- **Documentación:** Ver notebooks en `stock_pred_ec_wti.ipynb`
-
-### Contribuciones
-Las contribuciones son bienvenidas. Por favor:
-1. Fork el repositorio
-2. Crear rama feature (`git checkout -b feature/mejora`)
-3. Commit cambios (`git commit -am 'Agrega mejora'`)
-4. Push a rama (`git push origin feature/mejora`)
-5. Abrir Pull Request
-
----
-
-## 📜 Licencia
-
-Este proyecto está bajo licencia MIT. Ver `LICENSE` para detalles.
-
+- [ ] Add more features (historical volatility, advanced technical ratios)
+- [ ] Implement cross validation (5-fold CV)
+- [ ] Use SMOTE for class balancing
+- [ ] Explore neural networks (LSTM for time series)
+- [ ] Hyperparameter optimization (GridSearchCV)
+- [ ] Integration with more data sources
+- [ ] Interactive Dashboard (Streamlit or Dash)
+- [ ] Automatic prediction alerts
+- [ ] Backtesting of strategies
+- [ ] Ensemble model (multiple model combination)
 ---
 
 ## 📝 Changelog
 
-### v1.0.0 (Actual)
-- ✅ Sistema de predicción ML completamente funcional
-- ✅ 4 modelos entrenados y evaluados
-- ✅ Logistic Regression como modelo seleccionado
-- ✅ API REST con Flask
-- ✅ 6 visualizaciones automáticas
-- ✅ Modelo mejorado con balanceo de clases
-- ✅ Documentación completa
+### v1.0.0 (Current)
+
+- ✅ Fully functional ML prediction system
+- ✅ 4 models trained and evaluated
+- ✅ Logistic Regression as a selected model
+- ✅ API REST with Flask
+- ✅ 6 automatic views
+- ✅ Improved model with class balancing
+- ✅ Complete documentation
 
 ### v0.9.0 (Anterior)
 - Notebook exploratorio inicial
@@ -715,15 +696,12 @@ Este proyecto está bajo licencia MIT. Ver `LICENSE` para detalles.
 
 ---
 
-## 🙏 Agradecimientos
+## 🙏 Thanks
 
-- **Datos:** Yahoo Finance API (yfinance)
+- **Data:** Yahoo Finance API (yfinance)
 - **ML:** Scikit-learn, XGBoost
-- **Visualización:** Matplotlib, Seaborn
+- **Visualization:** Matplotlib, Seaborn
 - **Web:** Flask
 
 ---
 
-**Última actualización:** 2024
-**Versión:** 1.0.0
-**Python:** 3.12.1
