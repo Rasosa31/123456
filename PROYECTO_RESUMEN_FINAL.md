@@ -1,5 +1,5 @@
 # 📋 RESUMEN FINAL DEL PROYECTO
-## Sistema de Predicción: EC vs CL (Dólar Ecuatoriano vs Petróleo WTI)
+## Sistema de Predicción: EC vs CL (Ecopetrol S.A vs Petróleo WTI)
 
 **Versión:** 1.0.0  
 **Fecha:** 2024  
@@ -10,7 +10,7 @@
 
 ## 🎯 Resumen Ejecutivo
 
-Se ha completado **exitosamente** un sistema de predicción de precios del **Dólar Ecuatoriano (EC)** utilizando técnicas de **Machine Learning**, correlacionando con el precio del **Petróleo Crudo (CL=F/WTI)**.
+Se ha completado **exitosamente** un sistema de predicción de precios del **Ecopetrol S.A  (EC)** utilizando técnicas de **Machine Learning**, correlacionando con el precio del **Petróleo Crudo (CL=F/WTI)**.
 
 ### Objetivos Alcanzados
 
