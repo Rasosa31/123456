@@ -41,6 +41,11 @@ jobs:
             )
           done
 
+      - name: Generate predictions (train pipeline)
+        run: |
+          echo "=== Training pipeline and generating predictions ==="
+          python run_pipeline_from_df_ml.py
+
       - name: Run tests (verbose + capture logs)
         run: |
           echo "--- Environment ---" > ci_env.txt
