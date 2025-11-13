@@ -30,12 +30,18 @@ Follow these steps to set up the system, train the model, and generate predictio
    pip install -r requirements.txt
 
 2. Quick Script Execution
-   ```
 
+ ```bash
 
+Script             Description                                                        Command
 
-```Bash
+Train Model        Trains 4 models and saves the best one (Logistic Regression)       python run_pipeline_from_df_ml.py
+                   in data/best_model.pkl.
 
+Predict            Generates predictions on the test dataset.                         python predict_stock.py --use-df-ml
+
+Visualize          Generates 6 PNG charts (Confusion Matrix, ROC, etc.) in the        python generate_visualizations.py
+                   outputs/ folder.
 ```
 
 💻 REST API Integration (Flask)
