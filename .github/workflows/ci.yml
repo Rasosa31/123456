@@ -27,10 +27,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      - name: Install dependencies
+      - name: Install dependencies (upgrade pip + retry)
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          python -m pip install --upgrade pip setuptools wheel
+          # Intentar instalar requirements con reintentos para mitigar fallos transitorios de red
+          for i in 1 2 3 4 5; do
+            pip install --prefer-binary -r requirements.txt && break || (
+              echo "pip install fallo en intento $i; reintentando en 10s...";
+              sleep 10
+            )
+          done
 
       - name: Run tests
         run: |
